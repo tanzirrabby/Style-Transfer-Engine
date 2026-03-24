@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AI . GENERATIVE . ART | Style Transfer Engine</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}" />
+  </head>
+  <body>
+    <main class="container">
+      <header>
+        <p class="eyebrow">AI . GENERATIVE . ART</p>
+        <h1>Style Transfer Engine</h1>
+        <p>
+          Neural Style Transfer using VGG-19 for artistic image transformation. Apply any painting style to
+          photographs with a configurable style/content ratio, real-time preview, and batch export.
+        </p>
+        <div class="badges">
+          <span>VGG-19</span>
+          <span>PyTorch</span>
+          <span>Flask</span>
+          <span>Pillow</span>
+        </div>
+      </header>
+
+      <section class="card">
+        <h2>Single Image Preview</h2>
+        <form id="previewForm">
+          <label>Content image <input type="file" name="content" accept="image/*" required /></label>
+          <label>Style image <input type="file" name="style" accept="image/*" required /></label>
+
+          <div class="controls">
+            <label>Style weight <input type="number" step="10000" name="style_weight" value="1000000" /></label>
+            <label>Content weight <input type="number" step="0.1" name="content_weight" value="1" /></label>
+            <label>Steps <input type="number" step="10" name="steps" value="200" min="50" max="500" /></label>
+          </div>
+
+          <button type="submit">Generate Preview</button>
+        </form>
+        <div id="previewStatus" class="status"></div>
+        <img id="previewImage" class="preview" alt="Stylized output preview" />
+      </section>
+
+      <section class="card">
+        <h2>Batch Export</h2>
+        <form id="batchForm">
+          <label>Style image <input type="file" name="style" accept="image/*" required /></label>
+          <label>Content images <input type="file" name="contents" accept="image/*" multiple required /></label>
+
+          <div class="controls">
+            <label>Style weight <input type="number" step="10000" name="style_weight" value="1000000" /></label>
+            <label>Content weight <input type="number" step="0.1" name="content_weight" value="1" /></label>
+            <label>Steps <input type="number" step="10" name="steps" value="200" min="50" max="500" /></label>
+          </div>
+
+          <button type="submit">Run Batch Export</button>
+        </form>
+        <div id="batchStatus" class="status"></div>
+      </section>
+    </main>
+
+    <script src="{{ url_for('static', filename='app.js') }}"></script>
+  </body>
+</html>
